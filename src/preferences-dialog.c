@@ -151,9 +151,22 @@ up_keyboard (GtkWidget *button, PreferencesDialog *dialog)
 
     selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(dialog->selected_keyboards_treeview));
     if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+#if 1
+        GtkTreePath *path;
+        if ((path = gtk_tree_model_get_path(model, &iter))) {
+            if (gtk_tree_path_prev(path)) {
+                GtkTreeIter prev;
+                if (gtk_tree_model_get_iter(model, &prev, path)) {
+                    gtk_list_store_swap (GTK_LIST_STORE(model), &iter, &prev);
+                }
+            }
+            gtk_tree_path_free(path);
+        }
+#else
         GtkTreeIter prev = iter;
         if (gtk_tree_model_iter_previous (model, &prev))
             gtk_list_store_swap (GTK_LIST_STORE(model), &iter, &prev);
+#endif
     }
 }
 
