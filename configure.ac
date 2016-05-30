@@ -259,6 +259,7 @@ Build options:
   Build shared libs         $enable_shared
   Build static libs         $enable_static
   CFLAGS                    $CFLAGS
+  GTK version               $with_gtk
   Build Vala binding        $enable_vala
   Sound support             $enable_libcanberra
   Build document            $enable_gtk_doc
